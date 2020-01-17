@@ -4,11 +4,10 @@ import java.lang.Math;
 public class QuadraSketch {
     public static void main(String[] args) {
         byte i = 0;
-           
-        Scanner Stop = new Scanner(System.in);
-        String stopCheck = "stop";
-        String nextCheck = "next";
-        do{
+        boolean stop = false; 
+        Scanner Progressor = new Scanner(System.in);
+        
+        while (stop == false){
             System.out.println();
             System.out.println("----EXERCISE: Hello!");
                 
@@ -33,49 +32,13 @@ public class QuadraSketch {
             else {
                 System.out.println("----EXERCISE: This is not a quadratic function.");
             }
-            
             System.out.println();
             System.out.println("----EXERCISE: The End.");
             
             if(i <= 2){
-                System.out.println("-------------------------------------------------------------------------------------------------");
-                System.out.println("-------------------------------------------------------------------------------------------------");
-                System.out.println("Enter 'stop' if you want to stop or 'next' if you don't.");
-                System.out.println("This exercise will run again automatically till you have no attempts left.");
-                
-                String choice = "";
-                boolean m = choice.contains(stopCheck);
-                boolean n = choice.contains(nextCheck);
-                while((m == false)||(n == false)){
-                    choice = Stop.nextLine();
-                    if(choice.contains(stopCheck)){
-                        System.out.println("I am stopped.");
-                        break;
-                    }
-                    else if(choice.contains(nextCheck)){
-                        System.out.println("Go next.");
-                        break;
-                    }
-                    else{
-                        System.out.println("Error. Please try again.");
-                    }     
-                }
-                if(choice.contains(stopCheck)){
-                        break;
-                    }
+                stop = Stop(Progressor);
             }
-            i++;
-                
-            System.out.println("-------------------------------------------------------------------------------------------------");
-            System.out.println("-------------------------------------------------------------------------------------------------");
-                
-            System.out.println("You have " + (20 - i) + " attempts left to this exercise.");
-                
-            System.out.println("-------------------------------------------------------------------------------------------------");
-            System.out.println("-------------------------------------------------------------------------------------------------");
         }
-        while (i < 20);
-        
         System.out.println("Good bye! :)");
     }
     
@@ -129,5 +92,27 @@ public class QuadraSketch {
         TPy = Math.round(TPy);
         TPy /= 100;
         System.out.println("----EXERCISE: The coordinates of a turning point - TP(" + TPx + ", " + TPy + ").");
+    }
+    
+    public static boolean Stop (Scanner Progressor) {
+        String stopCheck = "stop";
+        String againCheck = "again";
+        
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.println("Enter 'stop' to stop the program or 'again' to start input again.");
+        String choice = Progressor.nextLine();
+        if(choice.contains(stopCheck)){
+            System.out.println("I am stopped.");  
+            return true;
+        }
+        else if(choice.contains(againCheck)){
+            System.out.println("Starting again.");
+            return false;
+        }
+        else{
+            System.out.println("Error. Please try again.");
+            return Stop (Progressor);
+        }
     }
 }
